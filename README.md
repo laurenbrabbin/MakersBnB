@@ -16,3 +16,9 @@ rspec
 # Run the server (better to do this in a separate terminal).
 rackup
 ```
+
+## Databases
+- Bookings
+- Users
+- Spaces
+- Hosts
