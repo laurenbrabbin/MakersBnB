@@ -1,4 +1,4 @@
-require "spec_helper"
+require "./spec/spec_helper.rb"
 require "rack/test"
 require_relative '../../app'
 require 'json'

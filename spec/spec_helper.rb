@@ -1,4 +1,3 @@
-
 require 'database_connection'
 ENV['ENV'] = 'test'
 DatabaseConnection.connect
