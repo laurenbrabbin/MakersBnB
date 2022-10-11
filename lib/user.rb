@@ -1,9 +1,9 @@
 require 'pg'
-require 'bcrypt'
+#require 'bcrypt'
 
 class User
-  attr_reader :id, :username, :password, :email
-
+  attr_accessor :id, :name, :username, :email, :password
+  
   #def initialize(id:, username:, password:, email:)
    # @id = id
     #@username = username

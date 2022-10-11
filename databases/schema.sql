@@ -1,8 +1,9 @@
 CREATE TABLE hosts (
     id SERIAL PRIMARY KEY,
     name text,
-    password text,
-    email text
+    username text,
+    email text,
+    password text
 );
 
 CREATE TABLE spaces (
@@ -10,7 +11,6 @@ CREATE TABLE spaces (
   name text,
   description TEXT,
   price numeric,
-  availability text,
   host_id INT,
   constraint fk_host foreign key(host_id) references
   hosts(id)
@@ -20,8 +20,8 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name text,
   username text,
-  password text,
-  email text
+  email text,
+  password text
 );
 
 CREATE TABLE bookings (
