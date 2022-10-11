@@ -40,6 +40,7 @@ RSpec.describe UserRepository do
     expect(users.last.name).to eq('user4')
   end
 
+
   xit 'finds the user by email' do
     repo = UserRepository.new
 
