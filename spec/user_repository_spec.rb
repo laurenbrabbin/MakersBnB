@@ -41,7 +41,7 @@ RSpec.describe UserRepository do
   end
 
 
-  xit 'finds the user by email' do
+  it 'finds the user by email' do
     repo = UserRepository.new
 
     user = repo.find_by_email("email1@email.com")
