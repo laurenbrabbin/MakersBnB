@@ -1,4 +1,5 @@
 require 'pg'
+require 'bcrypt'
 
 class User
   attr_reader :username, :password, :id

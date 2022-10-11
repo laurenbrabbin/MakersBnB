@@ -13,7 +13,7 @@ class DatabaseConnection
 
   def self.connect(database_name)
     @host = '127.0.0.1'
-    @database_name = database_name
+    @database_name = 'bnb'
     puts "Connecting to database `#{@database_name}`...".blue unless test_mode?
 
     if test_mode? && !@database_name.end_with?("_test")
@@ -121,6 +121,6 @@ class DatabaseConnection
   end
 
   def self.test_mode?
-    return ENV['ENV'] == 'test'
+    return ENV['ENV'] == 'bnb_test'
   end
 end

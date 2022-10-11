@@ -1,8 +1,9 @@
 require 'users'
 
+
 describe '.user_create' do
   it 'creates a user' do
-    user = User.user_create(username: 'user4', password 'password4')
+    user = User.user_create(username: 'user4', password: 'password4')
 
     expect(user.username).to eq ('user4')
     expect(user.password).to eq ('password4')
