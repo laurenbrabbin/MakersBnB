@@ -64,4 +64,10 @@ RSpec.describe UserRepository do
     expect(user.email).to eq('email2@email.com')
     expect(user.password).to eq('password2') 
   end
+
+  xit 'returns true if a user logs in' do
+    repo = UserRepository.new
+    login_result = repo.sign_in('email2@email.com', 'password2')
+    expect(login_result).to eq(true)
+  end
 end 
