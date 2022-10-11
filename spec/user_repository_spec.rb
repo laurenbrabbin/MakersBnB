@@ -14,12 +14,28 @@ RSpec.describe UserRepository do
     reset_users_table
   end
 
-it 'prints all users' do
-  repo = UserRepository.new
-  
- users = repo.all
+  it 'prints all users' do
+    repo = UserRepository.new
+    
+  users = repo.all
 
-  expect(users.length).to eq(3)
-  expect(users.first.name).to eq('user1')
-end
+    expect(users.length).to eq(3)
+    expect(users.first.name).to eq('user1')
+  end
+
+  it 'creates a new user' do
+    repo = UserRepository.new
+
+    new_user = User.new
+    new_user.name = 'user4'
+    new_user.username = 'username4'
+    new_user.email = 'email4@email.com'
+    new_user.password = 'password4'
+
+    repo.create(new_user)
+    users = repo.all
+
+    expect(users.length).to eq(4)
+    expect(users.last.name).to eq('user4')
+  end
 end 
