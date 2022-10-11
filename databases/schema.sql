@@ -16,6 +16,13 @@ CREATE TABLE spaces (
   hosts(id)
 );
 
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name text,
+  password text,
+  email text
+);
+
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
     space_id int,
@@ -30,11 +37,4 @@ CREATE TABLE bookings (
     start_date date,
     end_date date,
     confirmed text
-);
-
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  name text,
-  password text,
-  email text
 );
