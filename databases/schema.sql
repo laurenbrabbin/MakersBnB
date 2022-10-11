@@ -19,6 +19,7 @@ CREATE TABLE spaces (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name text,
+  username text,
   password text,
   email text
 );

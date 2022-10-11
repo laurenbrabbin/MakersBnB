@@ -10,7 +10,7 @@ describe '.user_create' do
   end
 
   it 'encrypts the password using BCrypt' do
-    expect(BCrypt::Password).to receive (:create).with('password4')
+    expect(BCrypt::Password).to receive(:create).with('password4')
 
     user = User.create(username: 'user4', email: 'email4@email.com', password: 'password4')
   end
