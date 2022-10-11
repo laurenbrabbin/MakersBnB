@@ -26,8 +26,9 @@ class BookingRepository
         sql = 'INSERT INTO bookings (space_id, host_id, user_id, start_date, end_date, confirmed) VALUES ($1, $2, $3, $4, $5, $6)';
         params = [booking.space_id, booking.host_id, booking.user_id, booking.start_date, booking.end_date, booking.confirmed]
         DatabaseConnection.exec_params(sql, params)
-
     end
+
+    
 
 
     private
