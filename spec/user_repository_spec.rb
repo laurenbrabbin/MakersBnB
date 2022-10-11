@@ -52,4 +52,16 @@ RSpec.describe UserRepository do
     expect(user.email).to eq('email1@email.com')
     expect(user.password).to eq('password1') 
   end
+
+  it 'finds another user by email' do
+    repo = UserRepository.new
+
+    user = repo.find_by_email("email2@email.com")
+
+    expect(user.id).to eq("2") 
+    expect(user.name).to eq('user2') 
+    expect(user.username).to eq('username2') 
+    expect(user.email).to eq('email2@email.com')
+    expect(user.password).to eq('password2') 
+  end
 end 
