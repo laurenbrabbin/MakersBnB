@@ -3,12 +3,16 @@ require 'sinatra/reloader'
 require_relative 'lib/user_params'
 require_relative 'lib/host_params'
 require_relative 'lib/space_repository'
+require_relative 'lib/booking_repository'
+require_relative 'lib/booking'
+require_relative 'lib/database_connection'
 
 DatabaseConnection.connect
 
 class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
+    also_reload 'lib/booking_repository'
   end
 
   get '/' do
@@ -67,6 +71,12 @@ class Application < Sinatra::Base
       @new_host = create_host #need to add into method
       return erb(:host_created)
     end
+  end
+
+  get '/bookings' do
+    repo = BookingRepository.new
+    @bookings = repo.all
+    return erb(:bookings)
   end
   
   private

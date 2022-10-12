@@ -1,5 +1,6 @@
-require 'user_repository'
-require 'user'
+require_relative '../lib/user_repository'
+require_relative '../lib/user'
+
 
 
 RSpec.describe UserRepository do 

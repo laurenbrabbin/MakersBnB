@@ -1,3 +1,5 @@
+DROP TABLE hosts, spaces, users, bookings;
+
 CREATE TABLE hosts (
     id SERIAL PRIMARY KEY,
     name text,
@@ -11,6 +13,7 @@ CREATE TABLE spaces (
   name text,
   description TEXT,
   price numeric,
+  availability text,
   host_id INT,
   constraint fk_host foreign key(host_id) references
   hosts(id)

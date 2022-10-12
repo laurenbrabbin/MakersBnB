@@ -58,4 +58,13 @@ describe Application do
       expect(response.body).to include("<strong>property1</strong>")
     end
   end
+
+  context 'GET /bookings' do
+    it 'should return list of bookings' do
+      response = get('/bookings')
+      expect(response.status).to eq 200
+      expect(response.body).to include('<label>Booking ID: </label> 1')
+      expect(response.body).to include('<label>Start Date: </label> 2022-01-01')
+    end
+  end
 end
