@@ -18,11 +18,19 @@ describe Application do
     end
   end
   context 'GET /user' do
-    it 'should get the homepage' do
+    it 'should get the user homepage' do
       response = get('/user')
 
       expect(response.status).to eq(200)
       expect(response.body).to include("<h1><p>Feel at home anywhere</h1></p>")
+    end
+  end
+  context 'GET /host' do
+    it 'should get the user homepage' do
+      response = get('/host')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h1><p>Start your journey of renting your home</h1></p>")
     end
   end
   context 'GET /user/login' do
@@ -31,6 +39,23 @@ describe Application do
 
       expect(response.status).to eq(200)
       expect(response.body).to include("<h1><p>Log in to your account</h1></p>")
+    end
+  end
+  context 'GET /host/login' do
+    it 'should get the homepage' do
+      response = get('/host/login')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h1><p>Log in to your host account</h1></p>")
+    end
+  end
+  context 'GET /spaces' do
+    it 'should show all the spaces' do
+      response = get('/spaces')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h2> View places to stay... </h2>")
+      expect(response.body).to include("<strong>property1</strong>")
     end
   end
 end

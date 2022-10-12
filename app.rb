@@ -38,6 +38,9 @@ class Application < Sinatra::Base
     return erb(:view_spaces)
   end
 
+  get '/newspace' do
+  end
+
   post '/user/register' do
     @checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
     
