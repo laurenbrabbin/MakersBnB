@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MakersBnB</title>
+    </head>
+    <body>
+       <h1><p>Feel at home anywhere</h1></p>
+       
+       <h2> View places to stay... </h2>
+      
+       <div>
+          <% @spaces.each do |space| %>
+            <p>
+              <strong><%= space.name %></strong> (host: host username)</br>
+              <%= space.description %> </br>
+              price per night: <%= space.price %> 
+              <p><button onclick="location.href='/spaces'"> request to book </button></p>
+          <% end %>
+      </div> 
+  </body>
+</html>

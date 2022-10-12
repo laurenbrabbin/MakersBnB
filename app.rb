@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/user_params'
 require_relative 'lib/host_params'
+require_relative 'lib/space_repository'
 
 DatabaseConnection.connect
 
@@ -30,6 +31,13 @@ class Application < Sinatra::Base
     return erb(:host_login)
   end
 
+  get '/spaces' do
+    repo = SpaceRepository.new
+    @spaces = repo.all
+
+    return erb(:view_spaces)
+  end
+
   post '/user/register' do
     @checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
     
@@ -54,7 +62,7 @@ class Application < Sinatra::Base
       erb(:failed_host_registration)
     else 
       @new_host = create_host #need to add into method
-      return erb(:user_created)
+      return erb(:host_created)
     end
   end
   
@@ -81,8 +89,6 @@ class Application < Sinatra::Base
   end
 
   def create_host
-    new_host = Host.new
-
-    return new_host
+    return nil
   end
 end
