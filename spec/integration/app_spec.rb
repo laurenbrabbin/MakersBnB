@@ -7,8 +7,6 @@ describe Application do
   include Rack::Test::Methods
   let(:app) { Application.new }
 
-
-
   context 'GET /' do
     it 'should get the homepage' do
       response = get('/')
