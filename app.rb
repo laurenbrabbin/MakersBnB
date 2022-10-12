@@ -1,15 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/user_params'
-<<<<<<< HEAD
 require_relative 'lib/host'
-=======
-require_relative 'lib/host_params'
-require_relative 'lib/space_repository'
-require_relative 'lib/booking_repository'
-require_relative 'lib/booking'
-require_relative 'lib/database_connection'
->>>>>>> 664aff9eabc1507f39b91da3fd3bbb36cb97bb9e
 
 DatabaseConnection.connect
 
@@ -41,23 +33,10 @@ class Application < Sinatra::Base
     return erb(:host_login)
   end
 
-<<<<<<< HEAD
  post '/host/register' do
     host = Host.host_create(username: params[:username], password: params[:password])
-    return erb(:host_created)
+    return erb(:host_crxeated)
   end
-
-=======
-  get '/spaces' do
-    repo = SpaceRepository.new
-    @spaces = repo.all
-
-    return erb(:view_spaces)
-  end
-
-  get '/newspace' do
-  end
->>>>>>> 664aff9eabc1507f39b91da3fd3bbb36cb97bb9e
 
   post '/user/register' do
     @checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
@@ -92,6 +71,13 @@ class Application < Sinatra::Base
     @bookings = repo.all
     return erb(:bookings)
   end
+
+  get '/spaces' do
+    repo = SpaceRepository.new
+    @spaces = repo.all
+
+    return erb(:view_spaces)
+  end
   
   private
   def empty_user_params?
@@ -115,7 +101,6 @@ class Application < Sinatra::Base
     return new_user
   end
 
-<<<<<<< HEAD
   def empty_host_params?
     params[:new_name] == "" || params[:new_name] == nil || params[:new_username] == "" || params[:new_username] == nil || params[:new_email] == "" || params[:new_email] == nil || params[:new_password] == "" || params[:new_password] == nil 
   end
@@ -131,9 +116,5 @@ class Application < Sinatra::Base
 
     repo.create(new_host)
     return new_host
-=======
-  def create_host
-    return nil
->>>>>>> 664aff9eabc1507f39b91da3fd3bbb36cb97bb9e
   end
 end
