@@ -1,10 +1,13 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/user_params'
+require_relative 'lib/host'
 
 DatabaseConnection.connect
 
 class Application < Sinatra::Base
+  enable :sessions, :method_override
+
   configure :development do
     register Sinatra::Reloader
   end
@@ -28,6 +31,12 @@ class Application < Sinatra::Base
   get '/host/login' do
     return erb(:host_login)
   end
+
+ post '/host/register' do
+    host = Host.host_create(username: params[:username], password: params[:password])
+    return erb(:host_created)
+  end
+
 
   post '/user/register' do
     checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
@@ -60,5 +69,22 @@ class Application < Sinatra::Base
 
     repo.create(new_user)
     return new_user
+  end
+
+  def empty_host_params?
+    params[:new_name] == "" || params[:new_name] == nil || params[:new_username] == "" || params[:new_username] == nil || params[:new_email] == "" || params[:new_email] == nil || params[:new_password] == "" || params[:new_password] == nil 
+  end
+
+  def create_host
+    repo = Host.new
+    new_host = Host.new
+    new_host.id = (repo.all.length + 1)
+    new_host.name = params[:new_name]
+    new_host.username = params[:new_username]
+    new_host.email = params[:new_email]
+    new_host.password = params[:new_password]
+
+    repo.create(new_host)
+    return new_host
   end
 end
