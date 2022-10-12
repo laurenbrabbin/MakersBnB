@@ -45,7 +45,7 @@ class Host
     )
   end
 
-  def self.authenticate_host(username:, password:)
+  def self.authenticate_host(username:, password:) 
     connection = if ENV['ENVIRONMENT'] == 'test'
                    PG.connect(dbname: 'bnb_test')
                  else
