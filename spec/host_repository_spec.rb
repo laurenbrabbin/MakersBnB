@@ -1,8 +1,8 @@
-require 'user_repository'
-require 'user'
+require 'host_repository'
+require 'host'
 
 
-RSpec.describe UserRepository do 
+RSpec.describe HostRepository do 
 
   def reset_hosts_table
     seed_sql = File.read('spec/seeds_hosts.sql')

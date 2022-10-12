@@ -10,7 +10,7 @@ class HostRepository
     hosts = []
 
     result_set.each do |record|
-      host = host.new
+      host = Host.new
       host.id = record['id']
       host.name = record['name']
       host.username = record['username']
@@ -27,10 +27,10 @@ class HostRepository
     
     #can we do this without calling the id that it should be set as
     sql = '
-      INSERT INTO hosts (id, name, usertname, email, password) 
+      INSERT INTO hosts (id, name, username, email, password) 
         VALUES($1, $2, $3, $4, $5);'
     
-    sql_params = [new_host.id, new_host.name, new_host.hostname, new_host.email, encrypted_password]
+    sql_params = [new_host.id, new_host.name, new_host.username, new_host.email, encrypted_password]
 
     result_set = DatabaseConnection.exec_params(sql, sql_params)
   end
