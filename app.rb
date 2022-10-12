@@ -14,7 +14,15 @@ class Application < Sinatra::Base
     return erb(:user_homepage)
   end
 
+  get '/host' do
+    return erb(:host_homepage)
+  end
+
   get '/user/login' do
     return erb(:user_login)
+  end
+
+  get '/hosr/login' do
+    return erb(:host_login)
   end
 end
