@@ -14,7 +14,23 @@ describe Application do
       response = get('/')
 
       expect(response.status).to eq(200)
-      #expect(response.body).to eq("<title>MakersBnB</title>")
+      expect(response.body).to include("<title>MakersBnB</title>")
+    end
+  end
+  context 'GET /user' do
+    it 'should get the homepage' do
+      response = get('/user')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h1><p>Feel at home anywhere</h1></p>")
+    end
+  end
+  context 'GET /user/login' do
+    it 'should get the homepage' do
+      response = get('/user/login')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h1><p>Log in to your account</h1></p>")
     end
   end
 end
