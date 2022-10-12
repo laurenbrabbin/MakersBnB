@@ -30,14 +30,13 @@ class Application < Sinatra::Base
   end
 
   post '/user/register' do
-    checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
+    @checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
     
     if empty_user_params? 
       erb(:empty_user_params)
     
-    elsif checking_params.invaild_user_params?
+    elsif @checking_params.invaild_user_params?
       erb(:failed_user_registration)
-    
     else 
       @new_user = create_user
       return erb(:user_created)
@@ -52,7 +51,7 @@ class Application < Sinatra::Base
   def create_user
     repo = UserRepository.new
     new_user = User.new
-    new_user.id = (repo.all.length + 1)
+    new_user.id = (repo.all.length + 1) #look how we can remove this line so it automatically adds id
     new_user.name = params[:new_name]
     new_user.username = params[:new_username]
     new_user.email = params[:new_email]
