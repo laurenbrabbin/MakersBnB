@@ -14,7 +14,7 @@ class UserParams
   end
 
   def name_contains_incorrect_characters?
-    @name.gsub!(/[^0-9A-Za-z -.]/, '') == @name 
+    @name.gsub!(/[^A-Za-z -.]/, '') == @name 
   end
 
   def username_contains_incorrect_characters?

@@ -1,7 +1,15 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/user_params'
+<<<<<<< HEAD
 require_relative 'lib/host'
+=======
+require_relative 'lib/host_params'
+require_relative 'lib/space_repository'
+require_relative 'lib/booking_repository'
+require_relative 'lib/booking'
+require_relative 'lib/database_connection'
+>>>>>>> 664aff9eabc1507f39b91da3fd3bbb36cb97bb9e
 
 DatabaseConnection.connect
 
@@ -10,6 +18,7 @@ class Application < Sinatra::Base
 
   configure :development do
     register Sinatra::Reloader
+    also_reload 'lib/booking_repository'
   end
 
   get '/' do
@@ -32,25 +41,56 @@ class Application < Sinatra::Base
     return erb(:host_login)
   end
 
+<<<<<<< HEAD
  post '/host/register' do
     host = Host.host_create(username: params[:username], password: params[:password])
     return erb(:host_created)
   end
 
+=======
+  get '/spaces' do
+    repo = SpaceRepository.new
+    @spaces = repo.all
+
+    return erb(:view_spaces)
+  end
+
+  get '/newspace' do
+  end
+>>>>>>> 664aff9eabc1507f39b91da3fd3bbb36cb97bb9e
 
   post '/user/register' do
-    checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
+    @checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
     
     if empty_user_params? 
       erb(:empty_user_params)
     
-    elsif checking_params.invaild_user_params?
+    elsif @checking_params.invaild_user_params?
       erb(:failed_user_registration)
-    
     else 
       @new_user = create_user
       return erb(:user_created)
     end
+  end
+
+  post '/host/register' do
+    @checking_host_params = HostParams.new(params[:new_host_name], params[:new_host_username], params[:new_host_email], params[:new_host_password])
+    
+    if empty_host_params? 
+      erb(:empty_host_params)
+    
+    elsif @checking_host_params.invaild_host_params?
+      erb(:failed_host_registration)
+    else 
+      @new_host = create_host #need to add into method
+      return erb(:host_created)
+    end
+  end
+
+  get '/bookings' do
+    repo = BookingRepository.new
+    @bookings = repo.all
+    return erb(:bookings)
   end
   
   private
@@ -58,10 +98,14 @@ class Application < Sinatra::Base
     params[:new_name] == "" || params[:new_name] == nil || params[:new_username] == "" || params[:new_username] == nil || params[:new_email] == "" || params[:new_email] == nil || params[:new_password] == "" || params[:new_password] == nil 
   end
 
+  def empty_host_params?
+    params[:new_host_name] == "" || params[:new_host_name] == nil || params[:new_host_username] == "" || params[:new_host_username] == nil || params[:new_host_email] == "" || params[:new_host_email] == nil || params[:new_host_password] == "" || params[:new_host_password] == nil 
+  end
+
   def create_user
     repo = UserRepository.new
     new_user = User.new
-    new_user.id = (repo.all.length + 1)
+    new_user.id = (repo.all.length + 1) #look how we can remove this line so it automatically adds id
     new_user.name = params[:new_name]
     new_user.username = params[:new_username]
     new_user.email = params[:new_email]
@@ -71,6 +115,7 @@ class Application < Sinatra::Base
     return new_user
   end
 
+<<<<<<< HEAD
   def empty_host_params?
     params[:new_name] == "" || params[:new_name] == nil || params[:new_username] == "" || params[:new_username] == nil || params[:new_email] == "" || params[:new_email] == nil || params[:new_password] == "" || params[:new_password] == nil 
   end
@@ -86,5 +131,9 @@ class Application < Sinatra::Base
 
     repo.create(new_host)
     return new_host
+=======
+  def create_host
+    return nil
+>>>>>>> 664aff9eabc1507f39b91da3fd3bbb36cb97bb9e
   end
 end

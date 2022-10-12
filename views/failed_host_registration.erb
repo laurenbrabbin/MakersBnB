@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MakersBnB</title>
+    </head>
+    <body>
+       <h1><p>Start your journey of renting your home</h1></p>
+       
+       <h2> Create a BNB Host Account </h2>
+
+       <FONT COLOR="RED">
+       
+        <div>
+         <%if @checking_host_params.name_contains_incorrect_characters? %>
+           <p>Your name cannot include special characters or numbers</p>
+         <%elsif @checking_host_params.username_contains_incorrect_characters? %>
+           <p>Your username cannot contain any special characters</p>
+        <% elsif @checking_host_params.password_contains_incorrect_characters? %>
+           <p>Your password has prohibitted chacters. Please only use these special characters: . ! ? * @ & + - , </p>
+        <% elsif @checking_host_params.weak_password? %>
+           <p>Your password needs to be atleast 8 characters long with at least 1 number</p>
+        <% elsif @checking_host_params.invalid_email? %>
+           <p>That is not a valid email address</p>
+        <% end %>
+       </div>
+
+       <FONT COLOR="BLACK">
+      <form action="/host/register" method="POST">
+      <div>
+        <label>Full Name:</label>
+        <input type="text" name="new_host_name">
+      </div></br>
+
+      <div>
+        <label>Username:</label>
+        <input type="text" name="new_host_username">
+      </div></br>
+      
+      <div>
+        <label>Email:</label>
+        <input type="text" name="new_host_email">
+      </div></br>
+
+      <div>
+        <label>Password:</label>
+        <input type="text" name="new_host_password">
+      </div></br>
+      
+      <input type="submit" value="Sign up">
+      </form>
+
+
+       <p><button onclick="location.href='/host/login'"> login </button></p>
+    </body>
+</html>

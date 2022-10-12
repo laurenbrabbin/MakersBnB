@@ -7,13 +7,26 @@
        <h1><p>Feel at home anywhere</h1></p>
        
        <h2> Create a BNB Account </h2>
-
-       <h3> Sorry some of the details you entered were incorrect </h3>
-        <h4> Please ensure that: </h4>
         <FONT COLOR="RED">
-        <h4> * Your name or username does not contain any numbers or special characters </h4>
-       <h4> * Your password must be at least 8 characters long with at least one number </h4>
-       <h4> * The email entered is a valid email address </h4>
+       
+        <div>
+         <%if @checking_params.name_contains_incorrect_characters? %>
+           <p>Your name cannot include special characters or numbers</p>
+         <%elsif @checking_params.username_contains_incorrect_characters? %>
+           <p>Your username cannot contain any special characters</p>
+        <% elsif @checking_params.password_contains_incorrect_characters? %>
+           <p>Your password has prohibitted chacters. Please only use these special characters: . ! ? * @ & + - , </p>
+        <% elsif @checking_params.weak_password? %>
+           <p>Your password needs to be atleast 8 characters long with at least 1 number</p>
+        <% elsif @checking_params.duplicate_username? %>
+           <p>That username is already in use, please use a differnt username or login here <button onclick="location.href='/user/login'"> login </button></p>
+        <% elsif @checking_params.duplicate_email? %>
+           <p>That email is already in use, please use a differnt email address or login here <button onclick="location.href='/user/login'"> login </button></p>
+        <% elsif @checking_params.invalid_email? %>
+           <p>That is not a valid email address</p>
+        <% end %>
+       </div>
+
        <FONT COLOR="BLACK">
        
       <form action="/user/register" method="POST">
