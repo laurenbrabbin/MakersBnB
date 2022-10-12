@@ -89,7 +89,7 @@ RSpec.describe UserParams do
   describe "#duplicate_email?" do
     context "given a duplicate email" do
       it "returns true" do
-        user_params = UserParams.new('checkinguser', 'checkingusername', 'user1@fakeemail.com', 'check')
+        user_params = UserParams.new('checkinguser', 'checkingusername', 'email1@email.com', 'check')
         expect(user_params.duplicate_email?).to eq(true)
       end
     end
