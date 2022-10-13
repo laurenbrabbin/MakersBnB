@@ -5,8 +5,9 @@
     </head>
     <body>
        <h1><p>Makers BnB</h1></p>
-       
-       <h2> View all bookings... </h2>
+       <h2> Welcome back <%= @host.name %>! </h2>
+       <h3><p><button onclick="location.href='/space/<%= @host.id%>'"> create a new space </button></p></h3>
+       <h3> View all bookings... </h3>    
 
     <div>
        <% @hosts_bookings.each do |booking| %>

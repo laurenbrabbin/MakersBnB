@@ -7,7 +7,7 @@
        <h1><p>Makers BnB</h1></p>
        
        <h2> Create a new space </h2>
-      <form action="/space/created" method="POST">
+      <form action="/space/<%=@host.id%>" method="POST">
       <div>
         <label>Space Name:</label>
         <input type="text" name="space_name">
@@ -15,12 +15,12 @@
 
       <div>
         <label>Description</label>
-        <input type="text" name="space description">
+        <input type="text" name="space_description">
       </div></br>
       
       <div>
         <label>Price per night</label>
-        <input type="text" name="space price">
+        <input type="text" name="space_price">
       </div></br>
       
       <input type="submit" value="List space">
