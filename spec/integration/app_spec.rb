@@ -4,19 +4,8 @@ require_relative '../../app'
 require 'json'
 
 describe Application do
-  # This is so we can use rack-test helper methods.
   include Rack::Test::Methods
-
-  # We need to declare the `app` value by instantiating the Application
-  # class so our tests work.
   let(:app) { Application.new }
-
-  # Write your integration tests below.
-  # If you want to split your integration tests
-  # accross multiple RSpec files (for example, have
-  # one test suite for each set of related features),
-  # you can duplicate this test file to create a new one.
-
 
   context 'GET /' do
     it 'should get the homepage' do
@@ -26,11 +15,19 @@ describe Application do
     end
   end
   context 'GET /host' do
-    it 'should get the user homepage' do
+    it 'should get the host homepage' do
       response = get('/host')
 
       expect(response.status).to eq(200)
       expect(response.body).to include("<h1><p>Start your journey of renting your home</h1></p>")
+    end
+  end
+  context 'GET /user' do
+    it 'should get the user homepage' do
+      response = get('/user')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h1><p>Feel at home anywhere</h1></p>")
     end
   end
   context 'GET /user/login' do
@@ -55,6 +52,20 @@ describe Application do
 
       expect(response.status).to eq(200)
       expect(response.body).to include("<h2> View places to stay... </h2>")
+    end
+  end
+  context 'GET/space/:host_id' do
+    it 'returns a create space page for a specic host' do
+      response = get('/space/1')
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h2> Create a new space </h2>")
+    end
+  end
+  context 'POST/space/:host_id' do
+    it 'returns a created space page for a specic host' do
+      response = post('/space/1')
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h3> Thank you for creating a space </h3>")
     end
   end
 end
