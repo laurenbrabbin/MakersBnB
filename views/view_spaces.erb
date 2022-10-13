@@ -11,7 +11,7 @@
        <div>
           <% @spaces.each do |space| %>
             <p>
-              <strong><%= space.name %></strong> (host: host username)</br>
+              <strong><%= space.name %></strong></br>
               <%= space.description %> </br>
               price per night: <%= space.price %> 
               <p><button onclick="location.href='/booking/<%=space.id%>'"> request to book </button></p>
