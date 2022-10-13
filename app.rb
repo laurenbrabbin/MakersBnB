@@ -112,6 +112,15 @@ class Application < Sinatra::Base
     return erb(:booking_requested)
   end
 
+  get '/approve_booking' do
+    repo = BookingRepository.new
+    booking = Booking.new
+    booking.id = params[:booking_id]
+    booking.confirmed = params[:confirmed]
+
+    return erb(:approve_booking)
+  end
+
 
   get '/spaces' do
     repo = SpaceRepository.new
