@@ -25,25 +25,6 @@ describe Application do
       expect(response.status).to eq(200)
     end
   end
-
-  context 'GET /bookings/new' do
-    it "returns a booking form" do
-        response = get('/bookings/new')
-
-        expect(response.status).to eq(200)
-        expect(response.body).to include('<form action="/bookings/new" method="post">')
-        expect(response.body).to include('<input type="date" name="start_date" placeholder="YYYY-MM-DD"><br />')
-    end
-  end
-
-  context 'Post /bookings/new' do
-    it "should create a booking" do
-      response = post('/bookings/new', space_id: '1', host_id: '1', user_id: '1', start_date: "2022-03-03", end_date: "2022-03-10", confirmed: "yes")
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include("<h1><p>Feel at home anywhere</h1></p>")
-    end
-  end
   context 'GET /host' do
     it 'should get the user homepage' do
       response = get('/host')
@@ -76,26 +57,4 @@ describe Application do
       expect(response.body).to include("<h2> View places to stay... </h2>")
     end
   end
-
-  context 'GET /bookings' do
-    xit 'should return list of bookings' do
-      response = get('/bookings')
-      expect(response.body).to include("2022-03-03")
-    end
-
-    it "should create a new booking in form and return confirmation page" do
-      response = post('/bookings/new',space_id: '1', host_id: '1', user_id: '1', start_date: "2022-03-03", end_date: "2022-03-10", confirmed: "yes")
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>Your booking has been requested</h1>')
-    end
-  end
-
-    context 'GET/approve/:booking_id' do
-      it "returns approval form" do
-        response = get('/approve_booking/1') 
-        expect(response.body).to include('<form action="/approve_booking/<%=@booking.id%>" method="post">')
-      end
-    end
-
 end

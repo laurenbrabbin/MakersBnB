@@ -73,19 +73,19 @@ RSpec.describe BookingRepository do
             booking.confirmed = "no"
             repo.request(booking)
             second = repo.find(3)
-            second.confirmed = 'Yes'
+            second.confirmed = 'yes'
             approve = repo.approve(second)
             updated = repo.find(3)
-            expect(updated.confirmed).to eq 'Yes'
+            expect(updated.confirmed).to eq 'yes'
         end
 
         it 'test existing booking' do
             repo = BookingRepository.new
             second = repo.find(2)
-            second.confirmed = 'Yes'
+            second.confirmed = 'yes'
             approve = repo.approve(second)
             updated = repo.find(2)
-            expect(updated.confirmed).to eq 'Yes'
+            expect(updated.confirmed).to eq 'yes'
         end
     end
 
