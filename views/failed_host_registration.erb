@@ -21,6 +21,10 @@
            <p>Your password needs to be atleast 8 characters long with at least 1 number</p>
         <% elsif @checking_host_params.invalid_email? %>
            <p>That is not a valid email address</p>
+           <% elsif @checking_host_params.duplicate_username? %>
+           <p>That username is already in use, please use a differnt username or login here <button onclick="location.href='/host/login'"> login </button></p>
+        <% elsif @checking_host_params.duplicate_email? %>
+           <p>That email is already in use, please use a differnt email address or login here <button onclick="location.href='/host/login'"> login </button></p>
         <% end %>
        </div>
 
