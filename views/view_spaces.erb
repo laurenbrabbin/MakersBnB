@@ -14,7 +14,7 @@
               <strong><%= space.name %></strong> (host: host username)</br>
               <%= space.description %> </br>
               price per night: <%= space.price %> 
-              <p><button onclick="location.href='/spaces'"> request to book </button></p>
+              <p><button onclick="location.href='<% space.id %> /booking "> request to book </button></p>
           <% end %>
       </div> 
   </body>

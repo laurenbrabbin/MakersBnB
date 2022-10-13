@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/user_params'
 require_relative 'lib/booking_repository'
+require_relative 'lib/space_repository'
 require_relative 'lib/user_repository'
 require_relative 'lib/host_params'
 require_relative 'lib/host'
@@ -80,6 +81,10 @@ class Application < Sinatra::Base
     @spaces = repo.all
 
     return erb(:view_spaces)
+  end
+
+  get '/new/space' do
+    return erb(:new_space)
   end
   
   private
