@@ -42,11 +42,6 @@ class Application < Sinatra::Base
     return erb(:host_login)
   end
 
- #post '/host/register' do
-  #  host = Host.host_create(username: params[:username], password: params[:password])
-  #  return erb(:host_created)
-# end
-
   get '/spaces' do
     repo = SpaceRepository.new
     @spaces = repo.all
@@ -54,7 +49,27 @@ class Application < Sinatra::Base
     return erb(:view_spaces)
   end
 
-  get '/newspace' do
+  get '/space/:host_id' do
+    repo = HostRepository.new
+    @host = repo.find(params[:host_id])
+
+    return erb(:new_space)
+  end
+
+  post '/space/:hostid' do
+    repo = HostRepository.new
+    @host = repo.find(params[:hostid])
+    
+    space_repo = SpaceRepository.new
+    space = Space.new
+    space.name = params[:space_name]
+    space.description = params[:space_description]
+    space.price = params[:space_price]
+    space.host_id = params[:hostid]
+
+    space_repo.create(space)
+
+    return erb(:space_created)
   end
 
 
@@ -147,7 +162,14 @@ class Application < Sinatra::Base
   get '/new/space' do
     return erb(:new_space)
   end
-  
+
+  get 'hostmanager/:hostid' do
+    repo = HostRepository.new
+    @host = repo.find(params[:hostid])
+
+    return erb(:host_manager)
+  end
+
   private
   def empty_user_params?
     params[:new_name] == "" || params[:new_name] == nil || params[:new_username] == "" || params[:new_username] == nil || params[:new_email] == "" || params[:new_email] == nil || params[:new_password] == "" || params[:new_password] == nil 
