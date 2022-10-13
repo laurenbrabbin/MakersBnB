@@ -45,18 +45,4 @@ RSpec.describe SpaceParams do
       end
     end
   end
-  describe "#duplicate_name?" do
-    context "given a duplicate name" do
-      it "returns true" do
-        space_params = SpaceParams.new('property1', 'flat in london', '10H')
-        expect(space_params.duplicate_name?).to eq(true)
-      end
-    end
-    context "given a valid name" do
-      it "returns false" do
-        space_params = SpaceParams.new('space', 'flat in london', '10H')
-        expect(space_params.duplicate_name?).to eq(false)
-      end
-    end
-  end
 end

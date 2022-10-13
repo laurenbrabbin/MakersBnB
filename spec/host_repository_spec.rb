@@ -41,6 +41,18 @@ RSpec.describe HostRepository do
   end
 
 
+  it 'finds the host by id' do
+    repo = HostRepository.new
+
+    host = repo.find("1")
+
+    expect(host.id).to eq("1") 
+    expect(host.name).to eq('host1') 
+    expect(host.username).to eq('hostusername1') 
+    expect(host.email).to eq('host1@email.com')
+    expect(host.password).to eq('password1') 
+  end
+
   it 'finds the host by email' do
     repo = HostRepository.new
 

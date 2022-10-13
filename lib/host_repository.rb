@@ -51,6 +51,23 @@ class HostRepository
 
     return host
   end
+
+  def find(id)
+    sql = 'SELECT id, name, username, email, password FROM hosts WHERE id = $1'
+    sql_params = [id]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+
+    record = result_set[0]
+
+    host = Host.new
+    host.id = record['id']
+    host.name = record['name']
+    host.username = record['username']
+    host.email = record['email']
+    host.password = record['password']
+
+    return host
+  end
  
     
   def sign_in(email, submitted_password)

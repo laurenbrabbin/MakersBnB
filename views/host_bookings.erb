@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MakersBnB</title>
+    </head>
+    <body>
+       <h1><p>Makers BnB</h1></p>
+       
+       <h2> View all bookings... </h2>
+
+    <div>
+       <% @hosts_bookings.each do |booking| %>
+         <p>
+           <strong>property: <%= booking.space_id %></strong></br>
+           user: <%= booking.user_id %></br>
+           <%= booking.start_date %> - <%= booking.end_date %> </br>
+           <p><button onclick="location.href='/approve/ <%= booking.id %>'"> Confirm Booking </button></p>
+       <% end %>
+    </div> 
+  </body>
+</html>
