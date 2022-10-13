@@ -30,4 +30,21 @@ class SpaceRepository
     result_set = DatabaseConnection.exec_params(sql, sql_params)
     return nil
   end 
+
+  def find(id)
+    sql = 'SELECT id, name, description, price, host_id FROM spaces WHERE id = $1'
+    sql_params = [id]
+    result_set = DatabaseConnection.exec_params(sql, sql_params)
+
+    record = result_set[0]
+
+    space = Space.new
+    space.id = record['id']
+    space.name = record['name']
+    space.description = record['description']
+    space.price = record['price']
+    space.host_id = record['host_id']
+    
+    return space
+  end
 end

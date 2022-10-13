@@ -1,0 +1,20 @@
+<html>
+    <head><title>Make a booking</title></head>
+    <body>
+
+    <h2>Booking form</h2>
+
+    <form action="/bookings/new" method="post">
+    <input type= "hidden" name= "space_id">
+        
+        <div>
+            <label>Date from</label>
+            <input type="date" name="start_date" placeholder="YYYY-MM-DD"><br />
+    </div>
+    <div>
+            <label>Date until</label>
+            <input type="date" name="end_date" placeholder="YYYY-MM-DD"><br />
+    </div>
+        <input type="submit">
+    </form>
+</html>

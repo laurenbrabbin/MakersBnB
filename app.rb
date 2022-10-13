@@ -92,6 +92,29 @@ class Application < Sinatra::Base
     return erb(:bookings)
   end
 
+  get '/booking/:id' do
+    repo = SpaceRepository.new
+    @space = repo.find(params[:id])
+    return erb(:make_booking)
+  end
+
+  post '/bookings/new' do
+    repo = BookingRepository.new
+
+    booking = Booking.new
+    booking.space_id = params[:space_id]
+    booking.host_id = params[:host_id]
+    booking.user_id = params[:user_id]
+    booking.start_date = params[:start_date]
+    booking.end_date = params[:end_date]
+    booking.confirmed = params[:confirmed]
+
+    repo.request(booking)
+
+    return erb(:booking_requested)
+  end
+
+
   get '/spaces' do
     repo = SpaceRepository.new
     @spaces = repo.all
