@@ -149,25 +149,7 @@ class Application < Sinatra::Base
     repo.approve(@booking)
     return erb(:booking_confirmation)
   end
-  
 
-  get '/spaces' do
-    repo = SpaceRepository.new
-    @spaces = repo.all
-
-    return erb(:view_spaces)
-  end
-
-  get '/new/space' do
-    return erb(:new_space)
-  end
-
-  get 'hostmanager/:hostid' do
-    repo = HostRepository.new
-    @host = repo.find(params[:hostid])
-
-    return erb(:host_manager)
-  end
 
   private
   def empty_user_params?
