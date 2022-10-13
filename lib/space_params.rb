@@ -1,7 +1,7 @@
 require_relative './space'
 require_relative './space_repository'
 
-class UserParams
+class SpaceParams
   def initialize(name, description, price)
     @name = name
     @description = description
@@ -13,7 +13,7 @@ class UserParams
   end
 
   def description_contains_incorrect_characters?
-    @description.gsub!(/[^0-9A-Za-z-_]/, '') == @description 
+    @description.gsub!(/[^0-9A-Za-z-_ ]/, '') == @description 
   end
 
   def incorrect_pricing?
@@ -30,7 +30,7 @@ class UserParams
         duplicate_name = true
       end
     end
-    return duplicate_name
+    return duplicate_space
   end
 
   def invaild_space_params?
