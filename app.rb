@@ -59,7 +59,7 @@ class Application < Sinatra::Base
     @host_id = params[:hostid]
     if empty_space_params?
       return erb(:empty_space_params)
-    else 
+    else #need to bring in checking space params class
       create_space
       return erb(:space_created)
     end
