@@ -36,4 +36,15 @@ RSpec.describe SpaceRepository do
     expect(repo.all.length).to eq(3)
     expect(repo.all.last.name).to eq('property3')
   end
+
+  it "finds a spae by id" do
+    repo = SpaceRepository.new
+    space = repo.find(1)
+
+    expect(space.id).to eq("1") 
+    expect(space.name).to eq("property1")
+    expect(space.description).to eq("description1")
+    expect(space.price).to eq("100")
+    expect(booking.host_id).to eq('1')
+  end
 end
