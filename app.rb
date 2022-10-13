@@ -6,6 +6,12 @@ require_relative 'lib/space_repository'
 require_relative 'lib/user_repository'
 require_relative 'lib/host_params'
 require_relative 'lib/host'
+require_relative 'lib/host_params'
+require_relative 'lib/space_repository'
+require_relative 'lib/booking_repository'
+require_relative 'lib/booking'
+require_relative 'lib/database_connection'
+
 
 DatabaseConnection.connect
 
@@ -41,6 +47,17 @@ class Application < Sinatra::Base
   #  host = Host.host_create(username: params[:username], password: params[:password])
   #  return erb(:host_created)
 # end
+
+  get '/spaces' do
+    repo = SpaceRepository.new
+    @spaces = repo.all
+
+    return erb(:view_spaces)
+  end
+
+  get '/newspace' do
+  end
+
 
   post '/user/register' do
     @checking_params = UserParams.new(params[:new_name], params[:new_username], params[:new_email], params[:new_password])
