@@ -53,12 +53,11 @@ describe Application do
 
       expect(response.status).to eq(200)
       expect(response.body).to include("<h2> View places to stay... </h2>")
-      expect(response.body).to include("<strong>property1</strong>")
     end
   end
 
   context 'GET /bookings' do
-    it 'should return list of bookings' do
+    xit 'should return list of bookings' do
       response = get('/bookings')
       expect(response.status).to eq 200
       expect(response.body).to include('<label>Booking ID: </label> 1')
