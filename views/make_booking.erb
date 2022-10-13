@@ -4,17 +4,16 @@
 
     <h2>Booking form</h2>
 
-    <form action="/bookings/new" method="post">
-    <input type= "hidden" name= "space_id">
-        
+    <form action="/booking/<%= @space.id %>" method="post">
         <div>
-            <label>Date from</label>
-            <input type="date" name="start_date" placeholder="YYYY-MM-DD"><br />
-    </div>
-    <div>
-            <label>Date until</label>
-            <input type="date" name="end_date" placeholder="YYYY-MM-DD"><br />
-    </div>
+          <label>Date from</label>
+          <input type="date" name="booking_start_date" placeholder="YYYY-MM-DD"><br />
+        </div>
+        <div>
+          <label>Date until</label>
+          <input type="date" name="booking_end_date" placeholder="YYYY-MM-DD"><br />
+        </div>
+        
         <input type="submit">
     </form>
 </html>
