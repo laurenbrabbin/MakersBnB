@@ -1,5 +1,14 @@
-<title>Booking requested</title>
-<h1>Makers BnB</h1>
+<html>
+    <style>
+       body {
+        background-color: lightblue;
+                }
+    </style>
+    <body>
+        <title>Booking requested</title>
+        <h1>Makers BnB</h1>
 
-<h3> Thank you for creating a space 
-<p><button onclick="location.href='/bookings/<%= @host.id%>'"> Back to host manager </button></p>
+        <h3> Thank you for creating a space 
+        <p><button onclick="location.href='/bookings/<%= @host.id%>'"> Back to host manager </button></p>
+    </body>
+</html>
