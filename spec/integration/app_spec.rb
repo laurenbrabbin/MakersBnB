@@ -90,4 +90,13 @@ describe Application do
       expect(response.body).to include('<h1>Your booking has been requested</h1>')
     end
   end
+
+    context 'GET/approve_booking' do
+      it "returns approval form" do
+        response = get('/approve_booking') 
+        expect(response.body).to include('<label for="yes_no_radio">Do you agree to the booking?</label>')
+      end
+
+    end
+
 end

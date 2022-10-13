@@ -1,4 +1,4 @@
-<html>
+<%# <html>
     <body>
     <div id="wrapper">
         <label for="yes_no_radio">Do you agree to the booking?</label>
@@ -10,4 +10,11 @@
         </p>
     </div>
     </body>
-</html>
+</html> %>
+
+  <h1>Confirm a booking: <h1>
+    <form action="/approve_booking" method="post">
+    <input type="text" name="host_input">
+      
+    <input type='submit'>
+    </form>
