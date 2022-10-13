@@ -1,10 +1,13 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/user_params'
-require_relative 'lib/host'
-require_relative 'lib/host_params'
-require_relative 'lib/space_repository'
 require_relative 'lib/booking_repository'
+require_relative 'lib/space_repository'
+require_relative 'lib/user_repository'
+require_relative 'lib/host_params'
+require_relative 'lib/host'
+require_relative 'lib/host_repository'
+require_relative 'lib/host_params'
 require_relative 'lib/booking'
 require_relative 'lib/database_connection'
 
@@ -39,10 +42,10 @@ class Application < Sinatra::Base
     return erb(:host_login)
   end
 
- post '/host/register' do
-    host = Host.host_create(username: params[:username], password: params[:password])
-    return erb(:host_crxeated)
-  end
+ #post '/host/register' do
+  #  host = Host.host_create(username: params[:username], password: params[:password])
+  #  return erb(:host_created)
+# end
 
   get '/spaces' do
     repo = SpaceRepository.new
@@ -73,13 +76,13 @@ class Application < Sinatra::Base
     @checking_host_params = HostParams.new(params[:new_host_name], params[:new_host_username], params[:new_host_email], params[:new_host_password])
     
     if empty_host_params? 
-      erb(:empty_host_params)
+    erb(:empty_host_params)
     
     elsif @checking_host_params.invaild_host_params?
-      erb(:failed_host_registration)
+    erb(:failed_host_registration)
     else 
-      @new_host = create_host #need to add into method
-      return erb(:host_created)
+     @new_host = create_host
+     return erb(:host_created)
     end
   end
 
@@ -116,6 +119,10 @@ class Application < Sinatra::Base
 
     return erb(:view_spaces)
   end
+
+  get '/new/space' do
+    return erb(:new_space)
+  end
   
   private
   def empty_user_params?
@@ -140,17 +147,17 @@ class Application < Sinatra::Base
   end
 
   def empty_host_params?
-    params[:new_name] == "" || params[:new_name] == nil || params[:new_username] == "" || params[:new_username] == nil || params[:new_email] == "" || params[:new_email] == nil || params[:new_password] == "" || params[:new_password] == nil 
+    params[:new_host_name] == "" || params[:new_host_name] == nil || params[:new_host_username] == "" || params[:new_host_username] == nil || params[:new_host_email] == "" || params[:new_host_email] == nil || params[:new_host_password] == "" || params[:new_host_password] == nil 
   end
 
   def create_host
-    repo = Host.new
+    repo = HostRepository.new
     new_host = Host.new
     new_host.id = (repo.all.length + 1)
-    new_host.name = params[:new_name]
-    new_host.username = params[:new_username]
-    new_host.email = params[:new_email]
-    new_host.password = params[:new_password]
+    new_host.name = params[:new_host_name]
+    new_host.username = params[:new_host_username]
+    new_host.email = params[:new_host_email]
+    new_host.password = params[:new_host_password]
 
     repo.create(new_host)
     return new_host
