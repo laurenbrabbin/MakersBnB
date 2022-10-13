@@ -6,9 +6,8 @@ require_relative 'lib/space_repository'
 require_relative 'lib/user_repository'
 require_relative 'lib/host_params'
 require_relative 'lib/host'
+require_relative 'lib/host_repository'
 require_relative 'lib/host_params'
-require_relative 'lib/space_repository'
-require_relative 'lib/booking_repository'
 require_relative 'lib/booking'
 require_relative 'lib/database_connection'
 
@@ -127,10 +126,11 @@ class Application < Sinatra::Base
   end
 
   def empty_host_params?
-    params[:new_name] == "" || params[:new_name] == nil || params[:new_username] == "" || params[:new_username] == nil || params[:new_email] == "" || params[:new_email] == nil || params[:new_password] == "" || params[:new_password] == nil 
+    params[:new_host_name] == "" || params[:new_host_name] == nil || params[:new_host_username] == "" || params[:new_host_username] == nil || params[:new_host_email] == "" || params[:new_host_email] == nil || params[:new_host_password] == "" || params[:new_host_password] == nil 
   end
 
   def create_host
+    repo = HostRepository.new
     new_host = Host.new
     new_host.id = (repo.all.length + 1)
     new_host.name = params[:new_host_name]
