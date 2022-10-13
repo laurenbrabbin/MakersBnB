@@ -72,9 +72,8 @@ class HostRepository
     
   def sign_in(email, submitted_password)
     host = find_by_email(email)
-    return nil if host.nil?
-    # Compare the submitted password with the encrypted one saved in the database
-    if submitted_password == BCrypt::Password.new(host.password)
+    return nil if user.nil?
+    if submitted_password == BCrypt::Password.new(user.password)
       return true
     else
       return false
