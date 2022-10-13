@@ -1,20 +1,8 @@
-<%# <html>
-    <body>
-    <div id="wrapper">
-        <label for="yes_no_radio">Do you agree to the booking?</label>
-        <p>
-        <input type="radio" name="yes_no" checked>Yes</input>
-        </p>
-        <p>
-        <input type="radio" name="yes_no">No</input>
-        </p>
-    </div>
-    </body>
-</html> %>
-
-  <h1>Confirm a booking: <h1>
-    <form action="/approve_booking" method="post">
-    <input type="text" name="host_input">
-      
+ <html>
+    <h1>Confirm a booking: <h1>
+    <form action="/approve_booking/<%=@booking.id%>" method="post">
+    <input type="text" name="host_input">   
     <input type='submit'>
     </form>
+
+  </html>

@@ -91,12 +91,11 @@ describe Application do
     end
   end
 
-    context 'GET/approve_booking' do
+    context 'GET/approve/:booking_id' do
       it "returns approval form" do
-        response = get('/approve_booking') 
-        expect(response.body).to include('<label for="yes_no_radio">Do you agree to the booking?</label>')
+        response = get('/approve_booking/1') 
+        expect(response.body).to include('<form action="/approve_booking/<%=@booking.id%>" method="post">')
       end
-
     end
 
 end

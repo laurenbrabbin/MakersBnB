@@ -109,22 +109,36 @@ class Application < Sinatra::Base
 
     return erb(:booking_requested)
   end
+  
+  get '/bookings/:host' do
+    repo = HostRepository.new
+    @host = repo.find(params[:host])
 
-  get '/approve_booking' do
+    booking_repo = BookingRepository.new
+    all_bookings = booking_repo.all
+    
+    @hosts_bookings = all_bookings.select do |booking|
+      booking.host_id == params[:host]
+    end
+
+    return erb(:host_bookings)
+  end
+
+  get '/approve/:booking_id' do
+    repo = BookingRepository.new
+    @booking = repo.find(params[:booking_id])
     return erb(:approve_booking)
   end
   
-  post '/approve_booking' do
+  post '/approve/:booking_id' do
     repo = BookingRepository.new
-    booking = Booking.new
+    @booking = repo.find(params[:booking_id])
+     booking = Booking.new
     booking.id = params[:booking_id]
     booking.confirmed = params[:confirmed]
     repo.approve(booking)
     return erb(:booking_confirmation)
   end
-
-
-
 
   get '/spaces' do
     repo = SpaceRepository.new
