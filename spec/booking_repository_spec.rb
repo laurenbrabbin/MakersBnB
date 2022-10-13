@@ -179,6 +179,6 @@ RSpec.describe BookingRepository do
       repo.delete(id_to_delete)
     
       all_bookings = repo.all
-      expect(all_bookings.first.id).to eq("2") #because one should be deleted
+      expect(all_bookings.first.id).to eq("2") 
     end  
 end

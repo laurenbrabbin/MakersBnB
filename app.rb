@@ -150,6 +150,12 @@ class Application < Sinatra::Base
     return erb(:booking_confirmation)
   end
 
+  get '/decline/:bookingid' do
+    repo = BookingRepository.new
+    @booking = repo.find(params[:bookingid])
+    repo.delete(@booking.id)
+    return erb(:booking_deleted)
+  end
 
   private
   def empty_user_params?
