@@ -26,6 +26,7 @@ class SpaceParams
     duplicate_space = false
 
     all_spaces.each do |space|
+      binding.irb
       if @name.downcase == space.name.downcase
         duplicate_name = true
       end
