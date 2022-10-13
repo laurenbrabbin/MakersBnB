@@ -14,7 +14,7 @@
            <strong>property: <%= booking.space_id %></strong></br>
            user: <%= booking.user_id %></br>
            <%= booking.start_date %> - <%= booking.end_date %> </br>
-           <p><button onclick="location.href='/approve/ <%= booking.id %>'"> Confirm Booking </button></p>
+           <p><button onclick="location.href='/approve/<%=booking.id%>'"> Confirm Booking </button></p>
        <% end %>
     </div> 
   </body>
