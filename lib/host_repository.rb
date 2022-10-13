@@ -65,4 +65,15 @@ class HostRepository
   end
 end
 
-# encrypted_password = BCrypt::Password.create(new_user.password)
+def un_hashed_password(hash:)
+  BCrypt::Password.new(hash)
+end
+#encrypted_password = BCrypt::Password.create(new_user.password)
+
+
+private
+class User
+  attr_accessor :id, :name, :username, :email, :password 
+end
+end
+
