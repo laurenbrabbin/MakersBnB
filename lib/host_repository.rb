@@ -72,11 +72,25 @@ class HostRepository
     
   def sign_in(email, submitted_password)
     host = find_by_email(email)
-    return nil if user.nil?
-    if submitted_password == BCrypt::Password.new(user.password)
+    
+    if host.nil?
+      return nil 
+    end
+
+    host_password = BCrypt::Password.new(host.password)
+
+    if submitted_password == host_password
       return true
     else
       return false
     end
   end
 end
+
+DatabaseConnection.connect
+repo = HostRepository.new
+
+
+new_host = repo.find_by_email('anotherhost@email.com')
+password = BCrypt::Password.new(new_host.password)
+p password == 'Password123'
