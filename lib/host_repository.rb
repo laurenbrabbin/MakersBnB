@@ -39,17 +39,21 @@ class HostRepository
     sql = 'SELECT id, name, username, email, password FROM hosts WHERE email = $1'
     sql_params = [email]
     result_set = DatabaseConnection.exec_params(sql, sql_params)
+    
+    if result_set.ntuples == 0
+      return nil
+    else 
+      record = result_set[0]
 
-    record = result_set[0]
+      host = Host.new
+      host.id = record['id']
+      host.name = record['name']
+      host.username = record['username']
+      host.email = record['email']
+      host.password = record['password']
 
-    host = Host.new
-    host.id = record['id']
-    host.name = record['name']
-    host.username = record['username']
-    host.email = record['email']
-    host.password = record['password']
-
-    return host
+      return host
+    end
   end
 
   def find(id)
@@ -76,10 +80,12 @@ class HostRepository
     if host.nil?
       return nil 
     end
-
+    p submitted_password
+    p host.password
     host_password = BCrypt::Password.new(host.password)
+    p host_password == submitted_password
 
-    if submitted_password == host_password
+    if host_password == submitted_password
       return true
     else
       return false
@@ -87,10 +93,13 @@ class HostRepository
   end
 end
 
-DatabaseConnection.connect
-repo = HostRepository.new
+#DatabaseConnection.connect
+#repo = HostRepository.new
 
 
-new_host = repo.find_by_email('anotherhost@email.com')
-password = BCrypt::Password.new(new_host.password)
-p password == 'Password123'
+#new_host = repo.find_by_email('newhost@account.com')
+# new_host
+#password = BCrypt::Password.new(new_host.password)
+#password == 'Password123'
+
+#p repo.sign_in('newhost@account.com', 'Password123')

@@ -43,15 +43,17 @@ class Application < Sinatra::Base
   end
 
   post '/host/login' do
+    email = params[:host_email]
+    password = params[:host_password]
     repo = HostRepository.new
-    status = repo.sign_in(params[:host_email], params[:host_password])
+    status = repo.sign_in(email, password)
     
-    if status == nil?
-      return(:host_not_recognised)
+    if status == nil
+      erb(:host_not_recognised)
     elsif status == false
-      return erb(:host_login_error)
+      erb(:host_login_error)
     else 
-      @host = repo.find_by_email(params[:host_email])
+      @host = repo.find_by_email(email)
       return erb(:host_successful_login)
     end
   end
