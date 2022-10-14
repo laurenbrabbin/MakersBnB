@@ -1,5 +1,6 @@
 require 'host_repository'
 require 'host'
+require 'BCrypt'
 
 
 RSpec.describe HostRepository do 
@@ -80,6 +81,7 @@ RSpec.describe HostRepository do
   xit 'returns true if a host logs in' do
     repo = HostRepository.new
     login_result = repo.sign_in('host2@email.com', 'password2')
+    host_password = BCrypt::Password.new('password2')
     expect(login_result).to eq(true)
   end
 end 

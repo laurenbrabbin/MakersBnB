@@ -38,8 +38,40 @@ class Application < Sinatra::Base
     return erb(:user_login)
   end
 
+  post '/user/login' do
+    email = params[:user_email]
+    password = params[:user_password]
+    repo = UserRepository.new
+    status = repo.sign_in(email, password)
+    
+    if status == nil
+      erb(:user_not_recognised)
+    elsif status == false
+      erb(:user_login_error)
+    else 
+      @user = repo.find_by_email(email)
+      return erb(:user_successful_login)
+    end
+  end
+
   get '/host/login' do
     return erb(:host_login)
+  end
+
+  post '/host/login' do
+    email = params[:host_email]
+    password = params[:host_password]
+    repo = HostRepository.new
+    status = repo.sign_in(email, password)
+    
+    if status == nil
+      erb(:host_not_recognised)
+    elsif status == false
+      erb(:host_login_error)
+    else 
+      @host = repo.find_by_email(email)
+      return erb(:host_successful_login)
+    end
   end
 
   get '/spaces' do

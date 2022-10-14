@@ -39,25 +39,34 @@ class UserRepository
     sql = 'SELECT id, name, username, email, password FROM users WHERE email = $1'
     sql_params = [email]
     result_set = DatabaseConnection.exec_params(sql, sql_params)
+    
+    if result_set.ntuples == 0
+      return nil
+    else 
+      record = result_set[0]
 
-    record = result_set[0]
+      user = User.new
+      user.id = record['id']
+      user.name = record['name']
+      user.username = record['username']
+      user.email = record['email']
+      user.password = record['password']
 
-    user = User.new
-    user.id = record['id']
-    user.name = record['name']
-    user.username = record['username']
-    user.email = record['email']
-    user.password = record['password']
-
-    return user
+      return user
+    end
   end
  
     
   def sign_in(email, submitted_password)
     user = find_by_email(email)
-    return nil if user.nil?
-    # Compare the submitted password with the encrypted one saved in the database
-    if submitted_password == BCrypt::Password.new(user.password)
+    
+    if user.nil?
+      return nil 
+    end
+   
+    user_password = BCrypt::Password.new(user.password)
+
+    if user_password == submitted_password
       return true
     else
       return false
