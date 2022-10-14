@@ -1,3 +1,5 @@
+
+
 require './lib/booking.rb'
 require_relative './database_connection'
 
@@ -73,4 +75,13 @@ class BookingRepository
         sql_params = ['yes', booking.id]
         result = DatabaseConnection.exec_params(sql, sql_params)
     end
+
+  def delete(id)
+    sql = 'DELETE FROM bookings WHERE id = $1;'
+    sql_params = [id]
+    
+    DatabaseConnection.exec_params(sql,sql_params)
+    
+    return nil
+  end
 end

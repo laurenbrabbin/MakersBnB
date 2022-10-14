@@ -3,6 +3,11 @@
        body {
         background-color: lightblue;
                 }
+         #logo{
+                     position:fixed;
+                     right:10px;
+                    bottom: 10px 
+                    }
     </style>
   <head></head>
   <body>
@@ -10,5 +15,6 @@
     <h2><p>Thank you for signing up to MakerBnB Hosts!</p></h2>
     <h4><a href="/<%=%>">return to homepage</a></h4>
     <p><button onclick="location.href='/space/<%=@new_host.id%>'"> List a space </button></p>
+    <h1><img id="logo" src="./logo-no-background.png" alt="makerslogo" width="420" height="320"><h1>
   </body>
 </html>

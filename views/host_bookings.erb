@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
-  
+  <style>
+       #logo{
+                     position:fixed;
+                     right:10px;
+                    bottom: 10px 
+                    }
+   </style>
     <head>
         <title>MakersBnB</title>
     </head>
@@ -18,7 +24,7 @@
            <strong>property: <%= booking.space_id %></strong></br>
            user: <%= booking.user_id %></br>
            <%= booking.start_date %> - <%= booking.end_date %> </br>
-           <p><button onclick="location.href='/approve/<%=booking.id%>'"> Confirm Booking </button></p>
+           <p><button onclick="location.href='/approve/<%=booking.id%>'"> Confirm Booking </button></p>  <p><button onclick="location.href='/decline/<%=booking.id%>'"> Cancel Booking </button></p>
        <% end %>
     </div> 
        <FONT COLOR="RED">
@@ -30,7 +36,9 @@
            <strong>property: <%= booking.space_id %></strong></br>
            user: <%= booking.user_id %></br>
            <%= booking.start_date %> - <%= booking.end_date %> </br>
+           <p><button onclick="location.href='/decline/<%=booking.id%>'"> Cancel Booking </button></p>
        <% end %>
     </div>
+    <h1><img id="logo" src="./logo-no-background.png" alt="makerslogo" width="320" height="320"><h1>
   </body>
 </html>

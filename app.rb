@@ -149,24 +149,12 @@ class Application < Sinatra::Base
     repo.approve(@booking)
     return erb(:booking_confirmation)
   end
-  
 
-  get '/spaces' do
-    repo = SpaceRepository.new
-    @spaces = repo.all
-
-    return erb(:view_spaces)
-  end
-
-  get '/new/space' do
-    return erb(:new_space)
-  end
-
-  get 'hostmanager/:hostid' do
-    repo = HostRepository.new
-    @host = repo.find(params[:hostid])
-
-    return erb(:host_manager)
+  get '/decline/:bookingid' do
+    repo = BookingRepository.new
+    @booking = repo.find(params[:bookingid])
+    repo.delete(@booking.id)
+    return erb(:booking_deleted)
   end
 
   private

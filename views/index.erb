@@ -18,6 +18,12 @@
             vertical-align: middle;
             }
 
+        #logo{
+                     position:fixed;
+                     right:10px;
+                    bottom: 10px 
+                    }
+
             #title {
                 text-align:center; font-size:50px; text-transform:uppercase; color:#222; letter-spacing:1px;
                 font-family:"Playfair Display", serif; font-weight:400;
@@ -28,6 +34,22 @@
                 width:100%;
                 text-align: center;
             }
+
+    #button {
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 11px 4px;
+    padding: 0 16px;
+    line-height: 27px;
+    height: 36px;
+    min-width: 54px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+}
     .inner
             {
                 display: inline-block; 
@@ -40,9 +62,9 @@
     <body>
        <h1><p id="title">Welcome to MakersBNB</h1></p>
        <div id="outer">
-       <div class="inner"><p><button onclick="location.href='/user'" > I am looking for a space </button></p></div>
-       <div class="inner"><p><button onclick="location.href='/host'"> I want to host a space </button></p></div>
+       <div class="inner"><p><button id= "button" onclick="location.href='/user'" data-role="button" data-inline="true"> I am looking for a space </button></p></div>
+       <div class="inner"><p><button id = "button" onclick="location.href='/host'"data-role="button" data-inline="true"> I want to host a space </button></p></div>
        </div>
-       <<img src="logo-black.png" alt="makerslogo">>
+       <h1><img id="logo" src="./logo-no-background.png" alt="makerslogo" width="320" height="320"><h1>
     </body>
 </html>
