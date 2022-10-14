@@ -80,10 +80,8 @@ class HostRepository
     if host.nil?
       return nil 
     end
-    p submitted_password
-    p host.password
+   
     host_password = BCrypt::Password.new(host.password)
-    p host_password == submitted_password
 
     if host_password == submitted_password
       return true
