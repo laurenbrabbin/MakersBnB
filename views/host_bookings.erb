@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <style>
-       body {
-        background-color: lightblue;
-                }
-    </style>
+  
     <head>
         <title>MakersBnB</title>
     </head>
@@ -13,9 +9,11 @@
        <h2> Welcome back <%= @host.name %>! </h2>
        <h3><p><button onclick="location.href='/space/<%= @host.id%>'"> create a new space </button></p></h3>
        <h3> View all bookings... </h3>    
-
+       <FONT COLOR="RED">
+       <h3> Unconfirmed bookings: </h3>
+       <FONT COLOR="Black">
     <div>
-       <% @hosts_bookings.each do |booking| %>
+       <% @unconfirmed_bookings.each do |booking| %>
          <p>
            <strong>property: <%= booking.space_id %></strong></br>
            user: <%= booking.user_id %></br>
@@ -23,5 +21,16 @@
            <p><button onclick="location.href='/approve/<%=booking.id%>'"> Confirm Booking </button></p>
        <% end %>
     </div> 
+       <FONT COLOR="RED">
+       <h3> Confirmed bookings: </h3>
+       <FONT COLOR="Black">
+       <div>
+       <% @confirmed_bookings.each do |booking| %>
+         <p>
+           <strong>property: <%= booking.space_id %></strong></br>
+           user: <%= booking.user_id %></br>
+           <%= booking.start_date %> - <%= booking.end_date %> </br>
+       <% end %>
+    </div>
   </body>
 </html>

@@ -70,6 +70,7 @@ class BookingRepository
 
     def approve(booking) 
         sql = 'UPDATE bookings SET confirmed = $1 WHERE id = $2'
-        result = DatabaseConnection.exec_params(sql, [booking.confirmed, booking.id])
+        sql_params = ['yes', booking.id]
+        result = DatabaseConnection.exec_params(sql, sql_params)
     end
 end

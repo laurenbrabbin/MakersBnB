@@ -17,13 +17,32 @@
             display: table-cell;
             vertical-align: middle;
             }
+
+            #title {
+                text-align:center; font-size:50px; text-transform:uppercase; color:#222; letter-spacing:1px;
+                font-family:"Playfair Display", serif; font-weight:400;
+                }
+
+    #outer
+            {   height: 20%;
+                width:100%;
+                text-align: center;
+            }
+    .inner
+            {
+                display: inline-block; 
+	            
+                }
     </style>
     <head>
         <title>MakersBnB</title>
     </head>
     <body>
-       <h1><p>Welcome to MakersBNB</h1></p>
-       <p><button onclick="location.href='/user'"> I am looking for a space </button></p>
-       <p><button onclick="location.href='/host'"> I want to host a space </button></p>
+       <h1><p id="title">Welcome to MakersBNB</h1></p>
+       <div id="outer">
+       <div class="inner"><p><button onclick="location.href='/user'" > I am looking for a space </button></p></div>
+       <div class="inner"><p><button onclick="location.href='/host'"> I want to host a space </button></p></div>
+       </div>
+       <<img src="logo-black.png" alt="makerslogo">>
     </body>
 </html>

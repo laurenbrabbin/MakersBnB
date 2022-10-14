@@ -1,11 +1,20 @@
-<html>
-   <body> 
-    <style>
+<!DOCTYPE html>
+     <style>
        body {
         background-color: lightblue;
                 }
     </style>
-        <h1>Booking succesfully made! </h1>
-    </body>
-
 </html>
+<html>
+    <head>
+        <title>MakersBnB</title>
+    </head>
+       <h1><p>Makers BnB</h1></p>
+       <h2> Thank you for confirming the booking ! </h2>
+       <body>
+        <h3>booking details:</h3> 
+            arrival: <%= @booking.start_date %></br>
+            checkout: <%= @booking.end_date %></br>
+            user id: <%= @booking.user_id %>
+      </body>
+      <p><button onclick="location.href='/bookings/<%= @booking.host_id%>'"> Back to host manager </button></p>
