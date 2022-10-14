@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html>
   <style>
+      body {
+        background-color: lightblue;
+        max-width: 500px;
+        margin: auto;
+        padding: 10px;
+        text-align:center;
+        }
+        body, h1, h2, h3, h4, h5, h6  {
+  font-family: Arial, Helvetica, sans-serif ;
+}
+        .buttons{background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 11px 4px;
+    padding: 0 16px;
+    line-height: 27px;
+    height: 36px;
+    min-width: 54px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;}
+       #title{
+                text-align:center; font-size:50px; text-transform:uppercase; color:#222; letter-spacing:1px;
+                font-family:"Playfair Display", serif; font-weight:400;
+                }
+        
        #logo{
                      position:fixed;
                      right:10px;
                     bottom: 10px 
                     }
+   
    </style>
     <head>
         <title>MakersBnB</title>
     </head>
     <body>
-       <h1><p>Makers BnB</h1></p>
+       <h1><p id="title">Makers BnB</h1></p>
        <h2> Welcome back <%= @host.name %>! </h2>
-       <h3><p><button onclick="location.href='/space/<%= @host.id%>'"> create a new space </button></p></h3>
+       <h3><p><button class="buttons" onclick="location.href='/space/<%= @host.id%>'"> create a new space </button></p></h3>
+   
        <h3> View all bookings... </h3>    
        <FONT COLOR="RED">
        <h3> Unconfirmed bookings: </h3>
@@ -24,21 +53,22 @@
            <strong>property: <%= booking.space_id %></strong></br>
            user: <%= booking.user_id %></br>
            <%= booking.start_date %> - <%= booking.end_date %> </br>
-           <p><button onclick="location.href='/approve/<%=booking.id%>'"> Confirm Booking </button></p>  <p><button onclick="location.href='/decline/<%=booking.id%>'"> Cancel Booking </button></p>
+           <p><button class= "buttons" onclick="location.href='/approve/<%=booking.id%>'"> Confirm Booking </button></p>  <p><button class="buttons" onclick="location.href='/decline/<%=booking.id%>'"> Cancel Booking </button></p>
        <% end %>
     </div> 
        <FONT COLOR="RED">
        <h3> Confirmed bookings: </h3>
        <FONT COLOR="Black">
-       <div>
+       <div class='child'>
        <% @confirmed_bookings.each do |booking| %>
          <p>
            <strong>property: <%= booking.space_id %></strong></br>
            user: <%= booking.user_id %></br>
            <%= booking.start_date %> - <%= booking.end_date %> </br>
-           <p><button onclick="location.href='/decline/<%=booking.id%>'"> Cancel Booking </button></p>
+           <p><button class="buttons" onclick="location.href='/decline/<%=booking.id%>'"> Cancel Booking </button></p>
        <% end %>
-    </div>
-    <h1><img id="logo" src="./logo-no-background.png" alt="makerslogo" width="320" height="320"><h1>
+    
+   </div>
+    <img id="logo" src="./logo-no-background.png" alt="makerslogo" width="220" height="220">
   </body>
 </html>
