@@ -7,15 +7,21 @@
        <h1><p>Makers BnB</h1></p>
        
        <h2> Create a new space </h2>
-       <FONT COLOR="RED">
-       <div>
-       <% if @empty_space_params %>
-         <p>* All fields must be complete</p>
-       <% end %>
-       </div>
-       <FONT COLOR="BLACK">
 
-      <form action="/space/<%=@host.id%>" method="POST">
+       <FONT COLOR="RED">
+       
+       <div>
+        <%if @checking_space_params.name_contains_incorrect_characters? %>
+          <p>* The space name cannot include special characters or numbers</p>
+        <%elsif @checking_space_params.description_contains_incorrect_characters? %>
+          <p>* The description cannot contain any special characters</p>
+       <% elsif @checking_space_params.incorrect_pricing? %>
+          <p>* Please only insert integers for the pricing </p>
+       <% end %>
+      </div>
+
+      <FONT COLOR="BLACK">
+      <form action="/space/<%=@host_id%>" method="POST">
       <div>
         <label>Space Name:</label>
         <input type="text" name="space_name">

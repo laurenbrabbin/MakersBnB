@@ -5,6 +5,7 @@ require_relative 'lib/booking_repository'
 require_relative 'lib/space_repository'
 require_relative 'lib/user_repository'
 require_relative 'lib/host_params'
+require_relative 'lib/space_params'
 require_relative 'lib/host'
 require_relative 'lib/host_repository'
 require_relative 'lib/host_params'
@@ -57,9 +58,17 @@ class Application < Sinatra::Base
 
   post '/space/:hostid' do
     @host_id = params[:hostid]
+
     if empty_space_params?
       return erb(:empty_space_params)
-    else #need to bring in checking space params class
+    end
+
+    @checking_space_params = SpaceParams.new(params[:space_name], params[:space_description], params[:space_price])
+
+    if 
+      @checking_space_params.invaild_space_params?
+      erb(:failed_space_creation)
+    else 
       create_space
       return erb(:space_created)
     end
