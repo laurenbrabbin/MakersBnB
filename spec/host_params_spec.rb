@@ -74,13 +74,13 @@ RSpec.describe HostParams do
   end
   describe "#duplicate_username?" do
     context "given a duplicate username" do
-      xit "returns true" do
-        user_params = HostParams.new('checkinguser', 'username1', 'checking@email.com', 'check')
+      it "returns true" do
+        user_params = HostParams.new('checkinguser', 'hostusername1', 'checking@email.com', 'check')
         expect(user_params.duplicate_username?).to eq(true)
       end
     end
     context "given a unique username" do
-      xit "returns false" do
+      it "returns false" do
         user_params = HostParams.new('checkinguser', 'uniqueusername1', 'checking@email.com', 'check')
         expect(user_params.duplicate_username?).to eq(false)
       end
@@ -88,13 +88,13 @@ RSpec.describe HostParams do
   end
   describe "#duplicate_email?" do
     context "given a duplicate email" do
-      xit "returns true" do
-        user_params = HostParams.new('checkinguser', 'checkingusername', 'email1@email.com', 'check')
+      it "returns true" do
+        user_params = HostParams.new('checkinguser', 'checkingusername', 'host1@email.com', 'check')
         expect(user_params.duplicate_email?).to eq(true)
       end
     end
     context "given a unique email" do
-      xit "returns false" do
+      it "returns false" do
         user_params = HostParams.new('checkingemail', 'checkingusername', 'checking@email.com', 'check')
         expect(user_params.duplicate_email?).to eq(false)
       end

@@ -123,13 +123,6 @@ describe Application do
       expect(response.body).to include("<h4> * please ensure all fields are complete </h4>")
     end
   end
-  context 'GET/booking/:id' do
-    xit "returns a page to request to book a space" do
-      response = get('/booking/2')
-      expect(response.status).to eq(200)
-      expect(response.body).to include("<h2>Booking form</h2>")
-    end
-  end
   context 'POST/booking/:space_id' do
     xit "returns a page that confirming the booking request" do
       response = post('/booking/1',
@@ -147,14 +140,6 @@ describe Application do
       expect(response.status).to eq(200)
       expect(response.body).to include("<h3> Unconfirmed bookings: </h3>")
       expect(response.body).to include("<h3> Confirmed bookings: </h3>")
-    end
-  end
-  context 'GET/approve/:booking_id' do
-    xit 'shows the host all their unconfirmed and confirmed bookings' do
-      response = get('/approve/1')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include("<h2> Thank you for confirming the booking ! </h2>")
     end
   end
 end
