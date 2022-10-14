@@ -9,11 +9,11 @@ class SpaceParams
   end
 
   def name_contains_incorrect_characters?
-    @name.gsub!(/[^A-Za-z -.]/, '') == @name 
+    @name.include?('<') || @name.include?('*') || @name.include?('>')
   end
 
   def description_contains_incorrect_characters?
-    @description.gsub!(/[^0-9A-Za-z-_ ]/, '') == @description 
+    @description.include?('<') || @description.include?('*') || @description.include?('>')
   end
 
   def incorrect_pricing?
@@ -21,6 +21,6 @@ class SpaceParams
   end 
 
   def invaild_space_params?
-    name_contains_incorrect_characters? || description_contains_incorrect_characters? || duplicate_name? || incorrect_pricing?
+    name_contains_incorrect_characters? || description_contains_incorrect_characters? ||  incorrect_pricing?
   end
 end
