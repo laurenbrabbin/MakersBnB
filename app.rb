@@ -5,12 +5,12 @@ require_relative 'lib/booking_repository'
 require_relative 'lib/space_repository'
 require_relative 'lib/user_repository'
 require_relative 'lib/host_params'
+require_relative 'lib/space_params'
 require_relative 'lib/host'
 require_relative 'lib/host_repository'
 require_relative 'lib/host_params'
 require_relative 'lib/booking'
 require_relative 'lib/database_connection'
-
 
 DatabaseConnection.connect
 
@@ -57,19 +57,21 @@ class Application < Sinatra::Base
   end
 
   post '/space/:hostid' do
-    repo = HostRepository.new
-    @host = repo.find(params[:hostid])
-    
-    space_repo = SpaceRepository.new
-    space = Space.new
-    space.name = params[:space_name]
-    space.description = params[:space_description]
-    space.price = params[:space_price]
-    space.host_id = params[:hostid]
+    @host_id = params[:hostid]
 
-    space_repo.create(space)
+    if empty_space_params?
+      return erb(:empty_space_params)
+    end
 
-    return erb(:space_created)
+    @checking_space_params = SpaceParams.new(params[:space_name], params[:space_description], params[:space_price])
+
+    if 
+      @checking_space_params.invaild_space_params?
+      erb(:failed_space_creation)
+    else 
+      create_space
+      return erb(:space_created)
+    end
   end
 
 
@@ -166,6 +168,10 @@ class Application < Sinatra::Base
     params[:new_host_name] == "" || params[:new_host_name] == nil || params[:new_host_username] == "" || params[:new_host_username] == nil || params[:new_host_email] == "" || params[:new_host_email] == nil || params[:new_host_password] == "" || params[:new_host_password] == nil 
   end
 
+  def empty_space_params?
+    params[:space_name] == "" || params[:space_name] == nil || params[:space_description] == "" || params[:space_description] == nil || params[:space_price] == "" || params[:space_price] == nil 
+  end
+
   def create_user
     repo = UserRepository.new
     new_user = User.new
@@ -194,5 +200,20 @@ class Application < Sinatra::Base
 
     repo.create(new_host)
     return new_host
+  end
+
+  def create_space
+    repo = HostRepository.new
+    @host = repo.find(params[:hostid])
+    
+    space_repo = SpaceRepository.new
+    space = Space.new
+    space.name = params[:space_name]
+    space.description = params[:space_description]
+    space.price = params[:space_price]
+    space.host_id = params[:hostid]
+
+    space_repo.create(space)
+    return space
   end
 end

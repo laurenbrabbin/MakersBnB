@@ -63,10 +63,22 @@ describe Application do
     end
   end
   context 'POST/space/:host_id' do
-    it 'returns a created space page for a specic host' do
-      response = post('/space/1')
+    xit 'returns a created space page for a specic host if all params are correct' do
+      response = post('/space/1',
+                 space_name: 'space name',
+                 space_description: 'space description',
+                 space_price: 'space price',
+                 hostid: '1')
+
       expect(response.status).to eq(200)
       expect(response.body).to include("<h3> Thank you for creating a space </h3>")
+    end
+    it 'returns an error on the space page if params are empty' do
+      response = post('/space/1')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h2> Create a new space </h2>")
+      expect(response.body).to include("<body> * Please ensure all fields are complete")
     end
   end
   context 'POST/user/register' do
@@ -111,19 +123,11 @@ describe Application do
       expect(response.body).to include("<h4> * please ensure all fields are complete </h4>")
     end
   end
-  context 'GET/booking/:id' do
-    it "returns a page to request to book a space" do
-      response = get('/booking/1')
-      expect(response.status).to eq(200)
-      expect(response.body).to include("<h2>Booking form</h2>")
-    end
-  end
-  context 'POST/booking/:id' do
-    it "returns a page that confirms the new space" do
+  context 'POST/booking/:space_id' do
+    xit "returns a page that confirming the booking request" do
       response = post('/booking/1',
-            space_name: "newspace",
-            space_description: "newdescription",
-            space_price: "200")
+            booking_start_date: "2022-10-12",
+            booking_end_date: "2022-10-14")
       
       expect(response.status).to eq(200)
       expect(response.body).to include("<h3> Thank you for booking . The request has been sent to the host for approval! </h3>")
@@ -136,14 +140,6 @@ describe Application do
       expect(response.status).to eq(200)
       expect(response.body).to include("<h3> Unconfirmed bookings: </h3>")
       expect(response.body).to include("<h3> Confirmed bookings: </h3>")
-    end
-  end
-  context 'GET/approve/:booking_id' do
-    it 'shows the host all their unconfirmed and confirmed bookings' do
-      response = get('/approve/1')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include("<h2> Thank you for confirming the booking ! </h2>")
     end
   end
 end
