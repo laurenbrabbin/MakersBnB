@@ -39,17 +39,21 @@ class UserRepository
     sql = 'SELECT id, name, username, email, password FROM users WHERE email = $1'
     sql_params = [email]
     result_set = DatabaseConnection.exec_params(sql, sql_params)
+    
+    if result_set.ntuples == 0
+      return nil
+    else 
+      record = result_set[0]
 
-    record = result_set[0]
+      user = User.new
+      user.id = record['id']
+      user.name = record['name']
+      user.username = record['username']
+      user.email = record['email']
+      user.password = record['password']
 
-    user = User.new
-    user.id = record['id']
-    user.name = record['name']
-    user.username = record['username']
-    user.email = record['email']
-    user.password = record['password']
-
-    return user
+      return user
+    end
   end
  
     
